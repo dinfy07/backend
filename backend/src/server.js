@@ -5,25 +5,15 @@ import bootstrapAdmin from './utils/bootstrapAdmin.js'
 import cors from 'cors';
 
 dotenv.config()
+console.log("🔥🔥🔥 THIS IS NEW BACKEND BUILD 🔥🔥🔥")
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://backend-j984.onrender.com"
-]
 
 app.use(cors({
-  origin: (origin, callback) => {
-    // allow server-to-server, postman, etc.
-    if (!origin) return callback(null, true)
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS"))
-    }
-  },
-  credentials: true,
+  origin: true,
+  credentials: true
 }))
+
+console.log("🔥 CORS ORIGINS:", process.env.NODE_ENV)
 
 mongoose
   .connect(process.env.MONGO_URL)
