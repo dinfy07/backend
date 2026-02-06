@@ -1,11 +1,8 @@
 import axios from "axios"
 import { setAccessToken, getAccessToken } from "@/auth/token.js"
 
-const API_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:8000/api/v1/"
-    : "/api/v1/"
-
+// 🔴 LIVE BACKEND
+const API_URL = "https://backend-ktl2.onrender.com/api/v1"
 const api = axios.create({
   baseURL: API_URL,
   withCredentials: true,
@@ -43,7 +40,7 @@ export const refreshToken = async () => {
 
 // application (публично)
 export const application = async (first_name, last_name, phone_number) => {
-  const {data} = await api.post("auth/application", {
+  const { data } = await api.post("auth/application", {
     first_name,
     last_name,
     phone_number,
@@ -53,36 +50,33 @@ export const application = async (first_name, last_name, phone_number) => {
 
 // ================= USER =================
 
-// 🔒 получить текущего пользователя (CabinetPage)
+// 🔒 получить текущего пользователя
 export const getMe = async () => {
   const { data } = await api.get("auth/me")
+  return data
+}
+
+export const updateMe = async (payload) => {
+  const { data } = await api.patch("auth/me", payload)
   return data
 }
 
 // ================= ALUMNI =================
 
 export const getAlumni = async ({ page = 1, limit = 10, year = null } = {}) => {
-  const params = new URLSearchParams({
-    page,
-    limit
-  })
+  const params = new URLSearchParams({ page, limit })
 
   if (year) {
-    params.append('year', year)
+    params.append("year", year)
   }
 
-  const { data } = await api.get(`/alumni?${params.toString()}`)
+  const { data } = await api.get(`alumni?${params.toString()}`)
   return data
 }
-
 
 // получить одного alumni по id
 export const getPerson = async (id) => {
   const { data } = await api.get(`alumni/${id}`)
-  return data
-}
-export const updateMe = async (payload) => {
-  const { data } = await api.patch('/auth/me', payload)
   return data
 }
 

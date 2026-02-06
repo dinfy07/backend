@@ -2,8 +2,14 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import app from './app.js'
 import bootstrapAdmin from './utils/bootstrapAdmin.js'
+import cors from 'cors';
 
 dotenv.config()
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}))
 
 mongoose
   .connect(process.env.MONGO_URL)
