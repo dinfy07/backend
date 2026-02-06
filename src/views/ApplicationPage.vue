@@ -1,7 +1,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import {application} from "@/api/main.js";
+import {application} from "@/api/index.js";
 
 const tel = ref("")
 const first_name = ref("")

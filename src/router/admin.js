@@ -1,40 +1,49 @@
-import UsersPage from "@/views/admin/UsersPage.vue";
-import ReportsPage from "@/views/admin/ReportsPage.vue";
-import IdeasPage from "@/views/admin/IdeasPage.vue";
-import ProjectsPage from "@/views/admin/ProjectsPage.vue";
-import RolesPage from "@/views/admin/RolesPage.vue";
-import RegisterPage from "@/views/admin/RegisterPage.vue";
+import UpdateComponent from "@/components/admin/UpdateComponent.vue";
 
+const UsersPage = () => import("@/views/admin/UsersPage.vue");
+const CreateComponent = () => import("@/components/admin/CreateComponent.vue");
 
-export const admins =[
+export const admins = [
   {
-    path: "/admin",
-    name: "Users",
+    path: '/admin',
+    name: 'Users',
     component: UsersPage,
+    meta: { admin: true }
   },
   {
-    path: "/admin/reports",
-    name: "Report",
-    component: ReportsPage,
+    path: '/admin/alumni',
+    name: 'Alumni',
+    component: UsersPage,
+    meta: { admin: true }
   },
   {
-    path: "/admin/ideas",
-    name: "Idea",
-    component: IdeasPage,
+    path: '/admin/register',
+    name: 'Register',
+    component: CreateComponent,
+    meta: { admin: true }
   },
   {
-    path: "/admin/projects",
-    name: "Project",
-    component: ProjectsPage,
+    path: '/admin/addalumni',
+    name: 'AddAlumni',
+    component: CreateComponent,
+    meta: { admin: true }
   },
+
+  // ===== UPDATE USER =====
   {
-    path: "/admin/roles",
-    name: "Role",
-    component: RolesPage,
+    path: '/admin/users/:id/edit',
+    name: 'UpdateUser',
+    component: UpdateComponent,
+    props: true,
+    meta: { admin: true }
   },
+
+  // ===== UPDATE ALUMNI =====
   {
-    path: "/admin/register",
-    name: "Register",
-    component: RegisterPage,
-  },
+    path: '/admin/alumni/:id/edit',
+    name: 'UpdateAlumni',
+    component: UpdateComponent,
+    props: true,
+    meta: { admin: true }
+  }
 ]

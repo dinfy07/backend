@@ -1,25 +1,90 @@
 main {
   padding-left: 18%;
   padding-top: 30px;
+  max-width: 800px;
 }
 main h1 {
-  color: #3B82F6;
-  font-family: Roboto;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-}
-main .input {
-  margin-top: 16px;
-}
-main .input h6 {
-  color: #111827;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
+  font-size: 28px;
   font-weight: 600;
-  line-height: normal;
+  margin-bottom: 24px;
+}
+main form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea,
+select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #4f46e5;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+select {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+button:hover {
+  background-color: #4338ca;
+}
+button:active {
+  transform: scale(0.98);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.notice {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.notice.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.notice.error {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 /*# sourceMappingURL=create.css.map */

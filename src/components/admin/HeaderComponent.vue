@@ -1,19 +1,26 @@
 <script setup>
-import {useRoute} from "vue-router";
+import { useRoute } from "vue-router"
 
 const props = defineProps({
-  title: String
+  title: String,
+  modelValue: String
 })
 
+const emit = defineEmits(["update:modelValue"])
 const route = useRoute()
-
 </script>
+
 
 <template>
 <header>
   <h1>{{props.title}}</h1>
   <div class="information">
-    <input placeholder="Поиск по имени..." type="text">
+    <input
+      placeholder="Поиск по имени..."
+      type="text"
+      :value="modelValue"
+      @input="emit('update:modelValue', $event.target.value)"
+    >
     <router-link :to="{name: 'Register'}" v-if="route.path == '/admin'">
       <div class="btn-card">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -21,32 +28,11 @@ const route = useRoute()
         </svg><h3>Добавить пользователя</h3>
       </div>
     </router-link>
-    <router-link :to="{name: 'Register'}" v-if="route.path == '/admin/reports'">
+    <router-link :to="{name: 'AddAlumni'}" v-if="route.path == '/admin/alumni'">
       <div class="btn-card">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
           <path d="M7.5 1C7.5 0.446875 7.05312 0 6.5 0C5.94688 0 5.5 0.446875 5.5 1V5.5H1C0.446875 5.5 0 5.94688 0 6.5C0 7.05312 0.446875 7.5 1 7.5H5.5V12C5.5 12.5531 5.94688 13 6.5 13C7.05312 13 7.5 12.5531 7.5 12V7.5H12C12.5531 7.5 13 7.05312 13 6.5C13 5.94688 12.5531 5.5 12 5.5H7.5V1Z" fill="white"/>
-        </svg><h3>Добавить отчет</h3>
-      </div>
-    </router-link>
-    <router-link :to="{name: 'Register'}" v-if="route.path == '/admin/ideas'">
-      <div class="btn-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-          <path d="M7.5 1C7.5 0.446875 7.05312 0 6.5 0C5.94688 0 5.5 0.446875 5.5 1V5.5H1C0.446875 5.5 0 5.94688 0 6.5C0 7.05312 0.446875 7.5 1 7.5H5.5V12C5.5 12.5531 5.94688 13 6.5 13C7.05312 13 7.5 12.5531 7.5 12V7.5H12C12.5531 7.5 13 7.05312 13 6.5C13 5.94688 12.5531 5.5 12 5.5H7.5V1Z" fill="white"/>
-        </svg><h3>Добавить идею</h3>
-      </div>
-    </router-link>
-    <router-link :to="{name: 'Register'}" v-if="route.path == '/admin/projects'">
-      <div class="btn-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-          <path d="M7.5 1C7.5 0.446875 7.05312 0 6.5 0C5.94688 0 5.5 0.446875 5.5 1V5.5H1C0.446875 5.5 0 5.94688 0 6.5C0 7.05312 0.446875 7.5 1 7.5H5.5V12C5.5 12.5531 5.94688 13 6.5 13C7.05312 13 7.5 12.5531 7.5 12V7.5H12C12.5531 7.5 13 7.05312 13 6.5C13 5.94688 12.5531 5.5 12 5.5H7.5V1Z" fill="white"/>
-        </svg><h3>Добавить проект</h3>
-      </div>
-    </router-link>
-    <router-link :to="{name: 'Register'}" v-if="route.path == '/admin/roles'">
-      <div class="btn-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-          <path d="M7.5 1C7.5 0.446875 7.05312 0 6.5 0C5.94688 0 5.5 0.446875 5.5 1V5.5H1C0.446875 5.5 0 5.94688 0 6.5C0 7.05312 0.446875 7.5 1 7.5H5.5V12C5.5 12.5531 5.94688 13 6.5 13C7.05312 13 7.5 12.5531 7.5 12V7.5H12C12.5531 7.5 13 7.05312 13 6.5C13 5.94688 12.5531 5.5 12 5.5H7.5V1Z" fill="white"/>
-        </svg><h3>Добавить роли</h3>
+        </svg><h3>Добавить alumni</h3>
       </div>
     </router-link>
   </div>

@@ -1,156 +1,169 @@
-<script setup >
-import {useRoute} from "vue-router";
-import {ref, watch} from "vue";
-import {getPerson} from "@/api/main.js";
+<script setup>
+import { useRoute} from "vue-router"
+import { ref, watch, computed } from "vue"
+import { getPerson } from "@/api/index.js"
 
 const route = useRoute()
 
-const person = ref( )
+const person = ref(null)
+const loading = ref(false)
+const error = ref(null)
+
+// загрузка данных
+const loadPerson = async (id) => {
+  try {
+    loading.value = true
+    error.value = null
+
+    const data = await getPerson(id)
+
+    // нормализация данных (защита шаблона)
+    person.value = {
+      ...data,
+      graduate_profile: data.graduate_profile ?? {
+        place_of_work: "",
+        year_of_graduation: ""
+      },
+      contacts: data.contacts ?? {},
+      achievements: data.achievements ?? []
+    }
+  } catch (e) {
+    error.value = "Не удалось загрузить данные"
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+}
 
 watch(
   () => route.params.id,
-  async (id) => {
+  (id) => {
     if (!id) return
-    const data = await getPerson(id)
-    person.value = data
+    loadPerson(id)
   },
   { immediate: true }
 )
 
+// computed для WhatsApp
+const whatsappLink = computed(() => {
+  if (!person.value?.phone_number) return "#"
+  return `https://wa.me/${person.value.phone_number}`
+})
 </script>
 
+
 <template>
-  <main>
-    <router-link class="btn-card cancel" :to="{name: 'alumni'}">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none">
-      <path d="M0.293701 7.29365C-0.0969238 7.68428 -0.0969238 8.31865 0.293701 8.70928L5.2937 13.7093C5.68433 14.0999 6.3187 14.0999 6.70933 13.7093C7.09995 13.3187 7.09995 12.6843 6.70933 12.2937L3.41245 8.9999H13C13.5531 8.9999 14 8.55303 14 7.9999C14 7.44678 13.5531 6.9999 13 6.9999H3.41558L6.7062 3.70615C7.09683 3.31553 7.09683 2.68115 6.7062 2.29053C6.31558 1.8999 5.6812 1.8999 5.29058 2.29053L0.290576 7.29053L0.293701 7.29365Z" fill="white"/>
-      </svg>
-      <span>Назад к коммюнити</span>
-    </router-link>
-    <div class="person">
-      <div class="photo">
-<!--        <img :src="person.photo" alt="">-->
-      </div>
-      <div class="name">
-        <h1>{{ person.first_name }} {{person.last_name}}</h1>
-<!--        <h4>{{person.graduate_profile.place_of_work}}</h4>-->
-      </div>
-      <div class="main-info">
-        <h2>Основная информация</h2>
-        <ul class="info">
-          <li>
-            <h4>Место работы</h4>
-            <h6>Яндекс, Frontend Developer</h6>
-          </li>
-          <li>
-            <h4>Год окончание</h4>
-            <h6>2020</h6>
-          </li>
-          <li>
-            <h4>Специализация</h4>
-            <h6>Frontend Developer</h6>
-          </li>
-          <li>
-            <h4>Место работы</h4>
-            <h6>Яндекс, Frontend Developer</h6>
-          </li>
-        </ul>
-      </div>
-      <div class="main-info contact">
-        <h2>Контактная информация</h2>
-        <ul class="info">
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <g clip-path="url(#clip0_2_5419)">
-                <path d="M6.44141 0.960842C6.14062 0.234279 5.34766 -0.15244 4.58984 0.0545917L1.15234 0.992092C0.472656 1.17959 0 1.79678 0 2.4999C0 12.164 7.83594 19.9999 17.5 19.9999C18.2031 19.9999 18.8203 19.5272 19.0078 18.8476L19.9453 15.4101C20.1523 14.6522 19.7656 13.8593 19.0391 13.5585L15.2891 11.996C14.6523 11.7304 13.9141 11.914 13.4805 12.4491L11.9023 14.3749C9.15234 13.0741 6.92578 10.8476 5.625 8.09756L7.55078 6.52334C8.08594 6.08584 8.26953 5.35147 8.00391 4.71475L6.44141 0.964748V0.960842Z" fill="#2563EB"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2_5419">
-                  <path d="M0 0H20V20H0V0Z" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <div class="text">
-              <h4>Контакты</h4>
-              <h6>+7 (999) 123-45-67</h6>
-            </div>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
-              <g clip-path="url(#clip0_2_5426)">
-                <path d="M14.8789 3.79297C13.2422 2.15234 11.0625 1.25 8.74609 1.25C3.96484 1.25 0.0742188 5.14062 0.0742188 9.92188C0.0742188 11.4492 0.472656 12.9414 1.23047 14.2578L0 18.75L4.59766 17.543C5.86328 18.2344 7.28906 18.5977 8.74219 18.5977H8.74609C13.5234 18.5977 17.5 14.707 17.5 9.92578C17.5 7.60938 16.5156 5.43359 14.8789 3.79297ZM8.74609 17.1367C7.44922 17.1367 6.17969 16.7891 5.07422 16.1328L4.8125 15.9766L2.08594 16.6914L2.8125 14.0312L2.64062 13.7578C1.91797 12.6094 1.53906 11.2852 1.53906 9.92188C1.53906 5.94922 4.77344 2.71484 8.75 2.71484C10.6758 2.71484 12.4844 3.46484 13.8438 4.82812C15.2031 6.19141 16.0391 8 16.0352 9.92578C16.0352 13.9023 12.7188 17.1367 8.74609 17.1367ZM12.6992 11.7383C12.4844 11.6289 11.418 11.1055 11.2188 11.0352C11.0195 10.9609 10.875 10.9258 10.7305 11.1445C10.5859 11.3633 10.1719 11.8477 10.043 11.9961C9.91797 12.1406 9.78906 12.1602 9.57422 12.0508C8.30078 11.4141 7.46484 10.9141 6.625 9.47266C6.40234 9.08984 6.84766 9.11719 7.26172 8.28906C7.33203 8.14453 7.29687 8.01953 7.24219 7.91016C7.1875 7.80078 6.75391 6.73438 6.57422 6.30078C6.39844 5.87891 6.21875 5.9375 6.08594 5.92969C5.96094 5.92188 5.81641 5.92188 5.67188 5.92188C5.52734 5.92188 5.29297 5.97656 5.09375 6.19141C4.89453 6.41016 4.33594 6.93359 4.33594 8C4.33594 9.06641 5.11328 10.0977 5.21875 10.2422C5.32812 10.3867 6.74609 12.5742 8.92188 13.5156C10.2969 14.1094 10.8359 14.1602 11.5234 14.0586C11.9414 13.9961 12.8047 13.5352 12.9844 13.0273C13.1641 12.5195 13.1641 12.0859 13.1094 11.9961C13.0586 11.8984 12.9141 11.8438 12.6992 11.7383Z" fill="#2563EB"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2_5426">
-                  <path d="M0 0H17.5V20H0V0Z" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <div class="text">
-              <h4>WhatsApp</h4>
-              <h6>+7 (999) 123-45-67</h6>
-            </div>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <g clip-path="url(#clip0_2_5433)">
-                <path d="M9.6875 0.3125C4.33723 0.3125 0 4.64973 0 10C0 15.3503 4.33723 19.6875 9.6875 19.6875C15.0378 19.6875 19.375 15.3503 19.375 10C19.375 4.64973 15.0378 0.3125 9.6875 0.3125ZM14.1778 6.90078C14.032 8.43262 13.4012 12.1499 13.0802 13.8656C12.9444 14.5916 12.677 14.835 12.4181 14.8588C11.8556 14.9106 11.4284 14.487 10.8835 14.1298C10.0309 13.5709 9.54918 13.223 8.72152 12.6776C7.76508 12.0473 8.38512 11.7011 8.9302 11.1346C9.07285 10.9865 11.5516 8.73191 11.5995 8.52738C11.6055 8.5018 11.6112 8.40629 11.5545 8.35613C11.4977 8.30598 11.4142 8.32297 11.3539 8.3366C11.2684 8.35603 9.90629 9.25632 7.26762 11.0375C6.88103 11.3029 6.53085 11.4323 6.21707 11.4255C5.87117 11.418 5.20582 11.23 4.71117 11.0691C4.10449 10.872 3.6223 10.7677 3.6643 10.4328C3.68617 10.2583 3.92641 10.0799 4.385 9.89762C7.20911 8.6672 9.09229 7.856 10.0345 7.46402C12.7248 6.345 13.2839 6.15062 13.6482 6.14414C13.7284 6.14281 13.9076 6.16266 14.0236 6.25684C14.1008 6.32393 14.15 6.41755 14.1615 6.51918C14.1812 6.64537 14.1867 6.77337 14.1778 6.90078Z" fill="#2563EB"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2_5433">
-                  <path d="M0 0H19.375V20H0V0Z" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <div class="text">
-              <h4>Telegram</h4>
-              <h6>@anna_petrova</h6>
-            </div>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M20 20H0V0H20V20Z" stroke="#E5E7EB"/>
-              <path d="M1.875 2.5C0.839844 2.5 0 3.33984 0 4.375C0 4.96484 0.277344 5.51953 0.75 5.875L9.25 12.25C9.69531 12.582 10.3047 12.582 10.75 12.25L19.25 5.875C19.7227 5.51953 20 4.96484 20 4.375C20 3.33984 19.1602 2.5 18.125 2.5H1.875ZM0 6.875V15C0 16.3789 1.12109 17.5 2.5 17.5H17.5C18.8789 17.5 20 16.3789 20 15V6.875L11.5 13.25C10.6094 13.918 9.39062 13.918 8.5 13.25L0 6.875Z" fill="#2563EB"/>
-            </svg>
-            <div class="text">
-              <h4>Email</h4>
-              <h6>anna.petrova@email.com</h6>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="main-info olimpiad">
-        <h2>Достижения и олимпиады</h2>
-        <ul>
-          <li>
-            <h4>Всероссийская олимпиада по программированию</h4>
-            <h6>1 место, региональный этап (2023)</h6>
-          </li>
-          <li>
-            <h4>Всероссийская олимпиада по программированию</h4>
-            <h6>1 место, региональный этап (2023)</h6>
-          </li>
-          <li>
-            <h4>Всероссийская олимпиада по программированию</h4>
-            <h6>1 место, региональный этап (2023)</h6>
-          </li>
-          <li>
-            <h4>Всероссийская олимпиада по программированию</h4>
-            <h6>1 место, региональный этап (2023)</h6>
-          </li>
-        </ul>
-      </div>
-      <div class="main-info contact">
-        <h2>О себе</h2>
-        <p></p>
-        <p>Увлеченный Frontend разработчик с более чем 2-летним опытом создания современных
-          веб-приложений. Специализируюсь на React, TypeScript и современных инструментахразработки.
-          Активно участвую в open-source проектах и делюсь знаниями с сообществомразработчиков.
-          Постоянно изучаю новые технологии и следую лучшим практикам вобласти веб-разработки.</p>
+  <main class="person-page">
+
+    <!-- LOADING -->
+    <div v-if="loading" class="loading">
+      Загрузка...
+    </div>
+
+    <!-- ERROR -->
+    <div v-else-if="error" class="error">
+      {{ error }}
+    </div>
+
+    <!-- CONTENT -->
+    <div v-else-if="person">
+
+      <!-- BACK -->
+      <router-link class="btn-card cancel" :to="{ name: 'alumni' }">
+        ← Назад к коммюнити
+      </router-link>
+
+      <div class="person">
+
+        <!-- HEADER -->
+        <div class="header">
+          <div class="photo">
+            <img
+              v-if="person.photo_url"
+              :src="person.photo_url"
+              alt="Фото"
+            />
+          </div>
+
+          <div class="name">
+            <h1>{{ person.first_name }} {{ person.last_name }}</h1>
+            <h4>{{ person.graduate_profile.place_of_work }}</h4>
+          </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="main-info">
+          <h2>О себе</h2>
+          <p>{{ person.about }}</p>
+        </div>
+
+        <!-- MAIN INFO -->
+        <div class="main-info">
+          <h2>Основная информация</h2>
+          <ul class="info">
+            <li>
+              <h4>Место работы</h4>
+              <h6>{{ person.graduate_profile.place_of_work }}</h6>
+            </li>
+            <li>
+              <h4>Год окончания</h4>
+              <h6>{{ person.graduate_profile.year_of_graduation }}</h6>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CONTACTS -->
+        <div class="main-info contact">
+          <h2>Контактная информация</h2>
+          <ul class="info">
+            <li v-if="person.phone_number">
+              📞 {{ person.phone_number }}
+            </li>
+
+            <li v-if="person.contacts.telegram">
+              💬 Telegram:
+              <a
+                :href="`https://t.me/${person.contacts.telegram}`"
+                target="_blank"
+              >
+                @{{ person.contacts.telegram }}
+              </a>
+            </li>
+
+            <li v-if="person.contacts.email">
+              ✉️ {{ person.contacts.email }}
+            </li>
+
+            <li v-if="person.phone_number">
+              <a
+                :href="whatsappLink"
+                target="_blank"
+                class="whatsapp"
+              >
+                WhatsApp
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ACHIEVEMENTS -->
+        <div v-if="person.achievements.length" class="main-info olimpiad">
+          <h2>Достижения и олимпиады</h2>
+          <ul>
+            <li
+              v-for="(item, index) in person.achievements"
+              :key="index"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </main>
 </template>
+
 
 <style scoped lang="sass">
 @use '../assets/styles/person'

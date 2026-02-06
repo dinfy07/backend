@@ -1,0 +1,19 @@
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import app from './app.js'
+import bootstrapAdmin from './utils/bootstrapAdmin.js'
+
+dotenv.config()
+
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(async () => {
+    console.log('MongoDB connected')
+
+    await bootstrapAdmin() // 👈 ВАЖНО
+
+    app.listen(process.env.PORT, () => {
+      console.log(`Server running on http://localhost:${process.env.PORT}`)
+    })
+  })
+  .catch(err => console.error('Mongo error:', err))

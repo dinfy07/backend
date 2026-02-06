@@ -1,43 +1,89 @@
-import api from "./main.js";
+import axios from "axios"
+import { setAccessToken, getAccessToken } from "@/auth/token.js"
 
-// ================= USERS =================
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8000/api/v1/"
+    : "/api/v1/"
 
-// получить всех пользователей (admin)
-export const getUsers = async () => {
-  const { data } = await api.get("user");
-  return data;
-};
+const api = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+})
 
-// создать user / admin
-export const registerUser = async (userData) => {
-  const { data } = await api.post("auth/register", userData);
-  return data;
-};
+// access token в headers
+api.interceptors.request.use((config) => {
+  const token = getAccessToken()
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
 
-// изменить роль
-export const updateUserRole = async (id, role) => {
-  const { data } = await api.patch(`user/${id}/role`, { role });
-  return data;
-};
+// ================= AUTH =================
 
-// удалить пользователя
-export const deleteUser = async (id) => {
-  const { data } = await api.delete(`user/${id}`);
-  return data;
-};
+// login
+export const login = async (phone_number, password) => {
+  const { data } = await api.post("auth/login", {
+    phone_number,
+    password,
+  })
+
+  setAccessToken(data.accessToken)
+  return data
+}
+
+// refresh
+export const refreshToken = async () => {
+  const { data } = await api.post("auth/refresh")
+
+  setAccessToken(data.accessToken)
+  return data
+}
+
+// application (публично)
+export const application = async (first_name, last_name, phone_number) => {
+  const {data} = await api.post("auth/application", {
+    first_name,
+    last_name,
+    phone_number,
+  })
+  return data
+}
+
+// ================= USER =================
+
+// 🔒 получить текущего пользователя (CabinetPage)
+export const getMe = async () => {
+  const { data } = await api.get("auth/me")
+  return data
+}
 
 // ================= ALUMNI =================
 
-// создать alumni (admin)
-export const createAlumni = async (alumniData) => {
-  const { data } = await api.post("alumni", alumniData);
-  return data;
-};
+export const getAlumni = async ({ page = 1, limit = 10, year = null } = {}) => {
+  const params = new URLSearchParams({
+    page,
+    limit
+  })
 
-// получить alumni (если нужно в админке)
-export const getAlumniAdmin = async () => {
-  const { data } = await api.get("alumni");
-  return data;
-};
+  if (year) {
+    params.append('year', year)
+  }
 
-export default api;
+  const { data } = await api.get(`/alumni?${params.toString()}`)
+  return data
+}
+
+
+// получить одного alumni по id
+export const getPerson = async (id) => {
+  const { data } = await api.get(`alumni/${id}`)
+  return data
+}
+export const updateMe = async (payload) => {
+  const { data } = await api.patch('/auth/me', payload)
+  return data
+}
+
+export default api
