@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 // ❗ devtools ТОЛЬКО локально
 const plugins = [vue()]
@@ -10,5 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default defineConfig({
-  plugins
+  plugins,
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 })
