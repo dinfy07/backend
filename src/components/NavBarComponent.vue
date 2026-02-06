@@ -12,7 +12,7 @@ import { isAuth } from "@/auth/auth.js"
     <div class="pages">
       <ul class="nav-items">
         <li :class="route.path === '/' ? 'active' : ''"><router-link :to="{ name: 'alumni' }">Түлектер</router-link></li>
-        <li v-if="isAuth" :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'login' }">Кіру</router-link></li>
+        <li v-if="!isAuth" :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'login' }">Кіру</router-link></li>
         <li v-else :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'cabinet' }">Жеке кабинет</router-link></li>
       </ul>
       <input type="checkbox" id="burger">
@@ -20,7 +20,7 @@ import { isAuth } from "@/auth/auth.js"
       <div class="burger-menu">
           <ul>
             <li :class="route.path === '/alumni' ? 'active' : ''"><router-link :to="{ name: 'alumni' }">Түлектер</router-link></li>
-            <li v-if="isAuth" :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'login' }">Кіру</router-link></li>
+            <li v-if="!isAuth" :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'login' }">Кіру</router-link></li>
             <li v-else :class="route.path === '/login' ? 'active' : ''"><router-link :to="{ name: 'cabinet' }">Жеке кабинет</router-link></li>
           </ul>
       </div>
