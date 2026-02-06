@@ -10,7 +10,6 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://backend-j984.onrender.com"
 ]
-
 app.use(cors({
   origin: (origin, callback) => {
     // разрешаем запросы без origin (Postman, server-to-server)
