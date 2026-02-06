@@ -1,0 +1,269 @@
+.border {
+  border: 2px solid #3B82F6;
+  padding: 12px;
+}
+
+main {
+  margin: 32px 24px;
+}
+main h1 {
+  color: #3B82F6;
+  font-family: Roboto;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  margin-top: 30px;
+}
+main .persons .avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+main .persons .avatar img {
+  width: 48px;
+  object-fit: cover;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid #3B82F6;
+}
+main .persons .avatar .text h5 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+main .persons .avatar .text h6 {
+  color: #4B5563;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+main .persons .avatar .first {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: 16px;
+}
+main .persons .avatar .first h6 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+main .idea-info {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-top: 18px;
+  width: 100%;
+  justify-content: space-between;
+}
+main .idea-info .voter {
+  height: fit-content;
+  padding: 24px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+main .idea-info .voter h5 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+main .idea-info .voter .info-vote {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 16px;
+  gap: 150px;
+  align-items: center;
+  border: 1px solid #BBF7D0;
+  background: #F0FDF4;
+  border-radius: 20px;
+}
+main .idea-info .voter .info-vote h5 {
+  color: #16A34A;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+main .idea-info .voter .info-vote .type {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+main .idea-info .voter .info-vote .type h6 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+main .idea-info .voter .against {
+  border: 1px solid #FECACA;
+  background: #FEF2F2;
+}
+main .idea-info .voter .against h5 {
+  color: #DC2626;
+}
+main .idea-info .voter .btn-vote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #DC2626;
+  border-radius: 10px;
+  padding: 8px 16px;
+  gap: 12px;
+}
+main .idea-info .voter .btn-vote h6 {
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+main .idea-info .voter .for {
+  background-color: #16A34A;
+}
+main .idea-info .description {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  padding: 28px;
+  width: 100%;
+}
+main .idea-info .description h3 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+main .idea-info .description p {
+  color: #4B5563;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+main .comment {
+  display: flex;
+  flex-flow: column;
+  padding: 24px;
+  margin-top: 24px;
+}
+main .comment h5 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+main .comment textarea {
+  padding: 16px;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 18px;
+  height: 150px;
+  border: 1px solid #6B7280;
+}
+main .comment textarea::placeholder {
+  color: #6B7280;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+main .comment textarea:focus-visible {
+  border: 2px solid #3B82F6;
+}
+main .comment .btn-card {
+  display: flex;
+  width: fit-content;
+  padding: 8px 15px;
+  gap: 8px;
+  align-items: center;
+  margin-top: 16px;
+  align-self: end;
+}
+main .comment .comments ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+}
+main .comment .comments ul li {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #6B7280;
+}
+main .comment .comments ul li .name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+main .comment .comments ul li .name h4 {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+main .comment .comments ul li .name h5 {
+  color: #6B7280;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  font-weight-line-height: 20px;
+}
+main .comment .comments ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border: 2px solid #3B82F6;
+}
+main .comment .comments ul li p {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.cancel {
+  padding: 12px 24px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+/*# sourceMappingURL=idea.css.map */

@@ -1,0 +1,235 @@
+@use "colors"
+
+.border
+  border: 2px solid colors.$main-blue
+  padding: 12px
+main
+  margin: 32px 24px
+  h1
+    color: colors.$main-blue
+    font-family: Roboto
+    font-size: 36px
+    font-style: normal
+    font-weight: 700
+    line-height: 40px
+    margin-top: 30px
+  .persons .avatar
+      display: flex
+      align-items: center
+      gap: 12px
+      margin-top: 18px
+      img
+        width: 48px
+        object-fit: cover
+        aspect-ratio: 1
+        border-radius: 50%
+        border: 3px solid colors.$main-blue
+      .text
+        h5
+          color: colors.$font-main
+          font-family: Roboto
+          font-size: 16px
+          font-style: normal
+          font-weight: 600
+          line-height: 24px /* 150% */
+        h6
+          color: colors.$font-second
+          font-family: Roboto
+          font-size: 14px
+          font-style: normal
+          font-weight: 400
+          line-height: 20px /* 142.857% */
+      .first
+        display: flex
+        gap: 8px
+        align-items: center
+        margin-left: 16px
+        h6
+          color: colors.$font-main
+          font-family: Roboto
+          font-size: 16px
+          font-style: normal
+          font-weight: 500
+          line-height: 24px /* 150% */
+  .idea-info
+    display: flex
+    flex-direction: row
+    gap: 24px
+    margin-top: 18px
+    width: 100%
+    justify-content: space-between
+    .voter
+      height: fit-content
+      padding: 24px
+      display: flex
+      gap: 12px
+      flex-direction: column
+      h5
+        color: colors.$font-main
+        font-family: Roboto
+        font-size: 20px
+        font-style: normal
+        font-weight: 600
+        line-height: normal
+      .info-vote
+        display: flex
+        justify-content: space-between
+        padding: 18px 16px
+        gap: 150px
+        align-items: center
+        border: 1px solid #BBF7D0
+        background: #F0FDF4
+        border-radius: 20px
+        h5
+          color: colors.$green
+          font-family: Roboto
+          font-size: 24px
+          font-style: normal
+          font-weight: 700
+          line-height: normal
+        .type
+          display: flex
+          gap: 8px
+          align-items: center
+          h6
+            color: colors.$font-main
+            font-family: Roboto
+            font-size: 16px
+            font-style: normal
+            font-weight: 500
+            line-height: 24px
+      .against
+        border: 1px solid #FECACA
+        background: #FEF2F2
+        h5
+          color: colors.$red
+      .btn-vote
+        display: flex
+        align-items: center
+        justify-content: center
+        background-color: colors.$red
+        border-radius: 10px
+        padding: 8px 16px
+        gap: 12px
+        h6
+          color: colors.$white
+          text-align: center
+          font-family: Roboto
+          font-size: 16px
+          font-style: normal
+          font-weight: 500
+          line-height: normal
+      .for
+        background-color: colors.$green
+    .description
+      display: flex
+      gap: 12px
+      flex-direction: column
+      padding: 28px
+      width: 100%
+      h3
+        color: colors.$font-main
+        font-family: Roboto
+        font-size: 24px
+        font-style: normal
+        font-weight: 600
+        line-height: normal
+      p
+        color: colors.$font-second
+        font-family: Roboto
+        font-size: 16px
+        font-style: normal
+        font-weight: 400
+        line-height: 26px
+  .comment
+      display: flex
+      flex-flow: column
+      padding: 24px
+      margin-top: 24px
+      h5
+        color: colors.$font-main
+        font-family: Roboto
+        font-size: 24px
+        font-style: normal
+        font-weight: 600
+        line-height: normal
+      textarea
+        padding: 16px
+        border-radius: 10px
+        width: 100%
+        margin-top: 18px
+        height: 150px
+        border: 1px solid colors.$font-third
+        &::placeholder
+          color: colors.$font-third
+          font-family: Roboto
+          font-size: 16px
+          font-style: normal
+          font-weight: 400
+          line-height: 24px
+        &:focus-visible
+          border: 2px solid colors.$main-blue
+      .btn-card
+        display: flex
+        width: fit-content
+        padding: 8px 15px
+        gap: 8px
+        align-items:  center
+        margin-top: 16px
+        align-self: end
+      .comments
+        ul
+          margin: 0
+          padding: 0
+          display: flex
+          flex-flow: column
+          gap: 12px
+          li
+            display: flex
+            gap: 8px
+            margin: 0
+            padding: 0 0 16px 0
+            border-bottom: 1px solid #6B7280
+            .name
+              display: flex
+              align-items: center
+              gap: 8px
+              h4
+                color: colors.$font-main
+                font-family: Roboto
+                font-size: 16px
+                font-style: normal
+                font-weight: 600
+                line-height: 24px
+              h5
+                color: colors.$font-third
+                font-family: Roboto
+                font-size: 14px
+                font-style: normal
+                font-weight: 400
+                  line-height: 20px
+            img
+              width: 40px
+              height: 40px
+              border-radius: 50%
+              object-fit: cover
+              aspect-ratio: 1/1
+              border: 2px solid colors.$main-blue
+            p
+              color: colors.$font-main
+              font-family: Roboto
+              font-size: 16px
+              font-style: normal
+              font-weight: 400
+              line-height: 24px
+
+.cancel
+  padding: 12px 24px
+  display: flex
+  gap: 8px
+  justify-content: center
+  align-items: center
+  width: fit-content
+
+
+

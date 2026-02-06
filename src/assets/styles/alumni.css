@@ -1,0 +1,25 @@
+.filter {
+  margin: clamp(24px, 4vw, 36px) 0 clamp(24px, 4vw, 32px) 0;
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+.filter ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.filter ul li {
+  padding: clamp(6px, 1vw, 10px) clamp(16px, 1vw, 24px);
+  background-color: #E5E7EB;
+  border-radius: 8px;
+  color: #111827;
+}
+
+.active {
+  color: #fff !important;
+  background-color: #3B82F6 !important;
+}
+
+/*# sourceMappingURL=users.css.map */

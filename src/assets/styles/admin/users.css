@@ -1,0 +1,46 @@
+main {
+  padding-left: 18%;
+  padding-top: 30px;
+}
+main table {
+  width: 100%;
+  margin-top: 30px;
+  border: 1px solid #E5E7EB;
+  border-spacing: 0;
+  border-radius: 16px;
+}
+main table thead {
+  background-color: #E5E7EB;
+  border-radius: 16px;
+}
+main table thead th:first-child {
+  border-top-left-radius: 16px;
+}
+main table thead th:last-child {
+  border-top-right-radius: 16px;
+}
+main table tr {
+  gap: 10px;
+}
+main table tr th {
+  color: #111827;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+  padding: 14px 18px;
+}
+main table tr td {
+  color: #374151;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  padding: 16px 24px;
+}
+
+/*# sourceMappingURL=users.css.map */

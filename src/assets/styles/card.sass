@@ -1,0 +1,144 @@
+@use 'colors.sass'
+
+.card-alumni
+  display: flex
+  flex-direction: column
+  padding: 16px
+  justify-content: center
+  align-items: center
+  gap: 16px
+
+  .photo img
+    border-radius: 50%
+    aspect-ratio: 1/1
+    border: 4px solid colors.$main-blue
+    height: 80px
+    object-fit: cover
+
+  .text
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 8px
+    h4
+      text-align: center
+      color: colors.$font-main
+    h5
+      color: colors.$font-second
+    h6
+      color: colors.$font-third
+.card-report
+  display: flex
+  flex-direction: column
+  padding: 26px
+  margin-top: 20px
+  .report
+    display: flex
+    flex-direction: column
+    gap: 8px
+    h3
+      font-size: 20px
+      color: colors.$main-blue
+      line-height: 0.9
+    h4
+      color: colors.$font-main
+      font-size: 16px
+    h5
+      color: colors.$font-main
+      margin-top: 8px
+      margin-bottom: 16px
+      font-size: 16px
+    p
+      color: colors.$font-third
+      font-size: 14px
+
+.card-idea
+  display: flex
+  flex-direction: column
+  padding: 26px
+  margin-top: 20px
+  min-width: 0
+  .idea
+    display: flex
+    flex-direction: column
+    gap: 12px
+    h3
+      font-size: 20px
+      color: colors.$main-blue
+      line-height: 0.9
+    h4
+      color: colors.$font-main
+      font-size: 16px
+      font-weight: normal
+      span
+        font-weight:  bold
+    h5
+      color: colors.$font-main
+      font-size: 16px
+      font-weight: normal
+      span
+        font-weight:  bold
+    p
+      color: colors.$font-third
+      font-size: 14px
+      margin-bottom: 16px
+  .footer
+    display: grid
+    grid-template-columns: 2fr 1fr
+    align-items: center
+    gap: 16px
+    .vote ul
+      display: flex
+      list-style: none
+      gap: 12px
+      margin: 0
+      padding: 0
+      li
+        display: flex
+        gap: 6px
+        background-color: #F3F4F6
+        border-radius: 8px
+        padding: 10px
+        color: #374151
+        transition: 0.2s ease
+        justify-content: flex-start
+        &:first-child:hover
+          background-color: colors.$green
+          color: colors.$white
+          svg .main
+              fill: colors.$white
+        &:last-child:hover
+          background-color: colors.$red
+          color: colors.$white
+          svg .main
+            fill: colors.$white
+
+.project
+  .footer
+    grid-template-columns: 1fr
+
+.btn-card
+  width: 100%
+@media (max-width: 568px)
+  .card-report
+    padding: 12px
+    margin-top: 8px
+  .card-idea
+    padding: 12px
+    margin-top: 8px
+    .idea
+      gap: 8px
+    .footer
+      .btn-card
+        font-size: clamp(12px, 1.5vw, 18px)
+        padding: clamp(6px, 0.5vw, 12px)
+      .vote ul
+        gap: clamp(6px, 0.5vw, 12px)
+        li
+          font-size: clamp(12px, 1.5vw, 18px)
+          padding: clamp(3px, 0.5vw, 12px)
+          svg
+            width: clamp(10px, 0.5vw, 12px)
+  
+

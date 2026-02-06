@@ -1,0 +1,120 @@
+@font-face {
+  font-family: Roboto;
+  src: url("@/assets/Roboto/Roboto-Regular.ttf");
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+.container {
+  padding: 0 clamp(0px, 3.5vw, 80px);
+  margin: auto;
+  position: relative;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0;
+  margin: 0;
+}
+
+.cards-alumni {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 968px) {
+  .cards-alumni {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .cards-alumni {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 470px) {
+  .cards-alumni {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.cards-reports {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 968px) {
+  .cards-reports {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .cards-reports {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+@media (max-width: 650px) {
+  .cards-reports {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+  }
+}
+
+.cards-idea {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .cards-idea {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .cards-idea {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .cards-idea {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.inside {
+  padding: clamp(16px, 2vw, 32px) clamp(8px, 2vw, 32px);
+}
+
+a {
+  color: #4B5563;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:active {
+  color: #3B82F6;
+}
+a:active::after {
+  width: 100% !important;
+}
+
+/*# sourceMappingURL=main.css.map */

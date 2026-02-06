@@ -1,0 +1,22 @@
+@use "colors.sass"
+
+.filter
+  margin: clamp(24px, 4vw, 36px) 0 clamp(24px, 4vw, 32px) 0
+  font-size: clamp(14px, 1.5vw, 16px)
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+    display: flex
+    flex-wrap: wrap
+    gap: 12px
+    li
+      padding: clamp(6px, 1vw, 10px) clamp(16px, 1vw, 24px)
+      background-color: colors.$gray
+      border-radius: 8px
+      color: colors.$font-main
+
+.active
+  color: colors.$white !important
+  background-color: colors.$main-blue !important
+

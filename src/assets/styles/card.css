@@ -1,0 +1,177 @@
+.card-alumni {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.card-alumni .photo img {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  border: 4px solid #3B82F6;
+  height: 80px;
+  object-fit: cover;
+}
+.card-alumni .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.card-alumni .text h4 {
+  text-align: center;
+  color: #111827;
+}
+.card-alumni .text h5 {
+  color: #4B5563;
+}
+.card-alumni .text h6 {
+  color: #6B7280;
+}
+
+.card-report {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  margin-top: 20px;
+}
+.card-report .report {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card-report .report h3 {
+  font-size: 20px;
+  color: #3B82F6;
+  line-height: 0.9;
+}
+.card-report .report h4 {
+  color: #111827;
+  font-size: 16px;
+}
+.card-report .report h5 {
+  color: #111827;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+.card-report .report p {
+  color: #6B7280;
+  font-size: 14px;
+}
+
+.card-idea {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  margin-top: 20px;
+  min-width: 0;
+}
+.card-idea .idea {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card-idea .idea h3 {
+  font-size: 20px;
+  color: #3B82F6;
+  line-height: 0.9;
+}
+.card-idea .idea h4 {
+  color: #111827;
+  font-size: 16px;
+  font-weight: normal;
+}
+.card-idea .idea h4 span {
+  font-weight: bold;
+}
+.card-idea .idea h5 {
+  color: #111827;
+  font-size: 16px;
+  font-weight: normal;
+}
+.card-idea .idea h5 span {
+  font-weight: bold;
+}
+.card-idea .idea p {
+  color: #6B7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.card-idea .footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: 16px;
+}
+.card-idea .footer .vote ul {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+.card-idea .footer .vote ul li {
+  display: flex;
+  gap: 6px;
+  background-color: #F3F4F6;
+  border-radius: 8px;
+  padding: 10px;
+  color: #374151;
+  transition: 0.2s ease;
+  justify-content: flex-start;
+}
+.card-idea .footer .vote ul li:first-child:hover {
+  background-color: #16A34A;
+  color: #fff;
+}
+.card-idea .footer .vote ul li:first-child:hover svg .main {
+  fill: #fff;
+}
+.card-idea .footer .vote ul li:last-child:hover {
+  background-color: #DC2626;
+  color: #fff;
+}
+.card-idea .footer .vote ul li:last-child:hover svg .main {
+  fill: #fff;
+}
+
+.project .footer {
+  grid-template-columns: 1fr;
+}
+
+.btn-card {
+  width: 100%;
+}
+
+@media (max-width: 568px) {
+  .card-report {
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .card-idea {
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .card-idea .idea {
+    gap: 8px;
+  }
+  .card-idea .footer .btn-card {
+    font-size: clamp(12px, 1.5vw, 18px);
+    padding: clamp(6px, 0.5vw, 12px);
+  }
+  .card-idea .footer .vote ul {
+    gap: clamp(6px, 0.5vw, 12px);
+  }
+  .card-idea .footer .vote ul li {
+    font-size: clamp(12px, 1.5vw, 18px);
+    padding: clamp(3px, 0.5vw, 12px);
+  }
+  .card-idea .footer .vote ul li svg {
+    width: clamp(10px, 0.5vw, 12px);
+  }
+}
+
+/*# sourceMappingURL=card.css.map */

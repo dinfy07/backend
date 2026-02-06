@@ -1,0 +1,13 @@
+.add-idea ul {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  margin: 24px 0 8px 0;
+}
+.add-idea ul li {
+  padding: 8px 24px;
+}
+
+/*# sourceMappingURL=ideas.css.map */

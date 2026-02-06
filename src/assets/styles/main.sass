@@ -1,0 +1,88 @@
+@use "colors"
+@font-face
+  font-family: Roboto
+  src: url("@/assets/Roboto/Roboto-Regular.ttf")
+@mixin button($top, $left, $bottom, $right)
+  padding:  $top $left $bottom $right
+  border-radius: 8px
+  border: 0 solid #E5E7EB
+  background: #3B82F6
+  color: #FFF
+  font-size: 16px
+  font-style: normal
+  font-weight: 500
+  width: 100%
+  text-align: center
+
+@mixin grid($columns)
+  display: grid
+  grid-template-columns: repeat($columns, 1fr)
+
+*
+  box-sizing: border-box
+body
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+  font-family: Roboto, sans-serif
+
+
+.container
+  padding: 0 clamp(0px, 3.5vw, 80px)
+  margin: auto
+  position: relative
+  width: 100%
+
+h1,h2,h3,h4,h5,h6,p
+  padding: 0
+  margin: 0
+
+.cards-alumni
+  @include grid(4)
+  gap: 16px
+  @media(max-width: 968px)
+    @include grid(3)
+  @media(max-width: 768px)
+    @include grid(2)
+  @media(max-width: 470px)
+    @include grid(1)
+
+
+.cards-reports
+  @include grid(3)
+  gap: 16px
+  @media(max-width: 968px)
+    @include grid(2)
+    gap: 12px
+  @media(max-width: 768px)
+    @include grid(2)
+    gap: 8px
+  @media(max-width: 650px)
+    @include grid(1)
+    gap: 8px
+
+
+.cards-idea
+  @include grid(2)
+  gap: 16px
+  @media(max-width: 1024px)
+    @include grid(1)
+  @media(max-width: 768px)
+    @include grid(1)
+  @media(max-width: 650px)
+    @include grid(1)
+
+.inside
+  padding: clamp(16px, 2vw, 32px) clamp(8px, 2vw, 32px)
+
+a
+  color: colors.$font-second
+  text-decoration: none
+  transition: color .2s ease-in-out
+
+a:active
+  color: colors.$main-blue
+  &::after
+    width: 100% !important
+//*
+//  border: 1px solid red !important
