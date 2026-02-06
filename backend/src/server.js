@@ -6,14 +6,24 @@ import cors from 'cors';
 
 dotenv.config()
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",                 // локальный фронт
-    "https://backend-j984.onrender.com"      // фронт на Render
-  ],
-  credentials: true
-}))
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://backend-j984.onrender.com"
+]
 
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow server-to-server, postman, etc.
+    if (!origin) return callback(null, true)
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}))
 
 mongoose
   .connect(process.env.MONGO_URL)
