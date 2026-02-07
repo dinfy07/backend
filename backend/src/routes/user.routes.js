@@ -11,7 +11,8 @@ const router = Router()
 
 router.get('/', auth, adminOnly, getUsers)
 router.get('/:id', auth, adminOnly, getUserById)
-router.delete('/:id', auth, adminOnly, deleteUser)
-router.patch('/:id/role', auth, adminOnly, updateUser)
+router.delete('/:id', auth, adminOnly, deleteUser)// routes/admin/users.js
+router.patch('/:id', auth, adminOnly, updateUser)
+
 
 export default router
