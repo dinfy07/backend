@@ -8,6 +8,25 @@ import userRoutes from './routes/user.routes.js'
 
 const app = express()
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://backend-j984.onrender.com"
+]
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+    // ❗ НЕ блокируем
+    return callback(null, true)
+  },
+  credentials: true,
+}))
+
+// 👇 обязательно для preflight
+app.options('*', cors())
 
 app.use(express.json())
 app.use(cookieParser())
