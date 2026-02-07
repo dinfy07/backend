@@ -86,27 +86,25 @@ export const login = async (req, res) => {
 }
 
 export const refresh = (req, res) => {
-  const token = req.cookies.refreshToken
-  if (!token) return res.sendStatus(401)
-
   try {
+    const token = req.cookies.refreshToken
+    if (!token) return res.sendStatus(401)
+
     const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
-    const { accessToken, refreshToken } = generateTokens({
+
+    const { accessToken } = generateTokens({
       id: payload.id,
       role: payload.role
     })
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true
-    })
-
+    // ❌ НЕ СТАВИМ res.cookie ЗДЕСЬ
     res.json({ accessToken })
-  } catch {
+  } catch (e) {
+    console.error('REFRESH ERROR:', e)
     res.sendStatus(401)
   }
 }
+
 
 export const application = async (req, res) => {
   try {
