@@ -1,5 +1,5 @@
 import { ref } from "vue"
-import {getAccessToken, setAccessToken} from "./token.js"
+import {setAccessToken} from "./token.js"
 import {getMe, refreshToken} from "@/api/index.js"
 
 export const isAuth = ref(false)
@@ -11,16 +11,8 @@ export const setAuth = (value) => {
 }
 
 export const initAuth = async () => {
-  const token = getAccessToken()
-
-  if (!token) {
-    isAuth.value = false
-    isAuthReady.value = true
-    return
-  }
-
   try {
-    // пробуем восстановиться через refresh
+    // ВСЕГДА пробуем восстановиться через refresh
     const { accessToken } = await refreshToken()
     setAccessToken(accessToken)
 
@@ -33,5 +25,5 @@ export const initAuth = async () => {
   } finally {
     isAuthReady.value = true
   }
-
 }
+
