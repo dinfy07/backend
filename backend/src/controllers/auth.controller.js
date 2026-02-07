@@ -56,27 +56,10 @@ export const updateMe = async (req, res) => {
 }
 
 export const me = async (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken
-    if (!refreshToken) return res.sendStatus(401)
-
-    const payload = jwt.verify(
-      refreshToken,
-      process.env.JWT_REFRESH_SECRET
-    )
-    const user = await User.findById(payload.id).select('-password')
-    if (!user) return res.sendStatus(401)
-
-    const { accessToken } = generateTokens({
-      id: user._id,
-      role: user.role
-    })
-
-    res.json({ user, accessToken })
-  } catch {
-    res.sendStatus(401)
-  }
+  const user = await User.findById(req.user.id).select('-password')
+  res.json(user)
 }
+
 
 
 export const login = async (req, res) => {
