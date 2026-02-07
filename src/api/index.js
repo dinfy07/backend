@@ -18,6 +18,9 @@ api.interceptors.request.use((config) => {
 })
 
 // ================= AUTH =================
+export const logoutApi = () => {
+  return api.post('auth/logout')
+}
 
 // login
 import {setAuth} from "@/auth/auth.js"

@@ -6,7 +6,7 @@ import {
   login,
   refresh,
   application,
-  me, updateMe
+  me, updateMe, logout
 } from '../controllers/auth.controller.js'
 
 const router = express.Router()
@@ -16,6 +16,7 @@ router.post('/login', login)
 router.post('/refresh', refresh)
 router.post('/application', application)
 router.patch('/me', auth, updateMe)
+router.post('/logout', logout)
 
 // 🔒 ЗАЩИЩЁННЫЙ РОУТ
 router.get('/me', auth, me)

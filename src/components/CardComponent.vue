@@ -1,5 +1,6 @@
 <script setup>
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
+import { isAuth } from "@/auth/auth"
 
 defineProps({
   object: {
@@ -9,8 +10,17 @@ defineProps({
 })
 
 const route = useRoute()
-</script>
+const router = useRouter()
 
+const onMoreClick = (id) => {
+  if (!isAuth) {
+    alert("Авторизуйтесь") // можно заменить на toast / modal
+    return
+  }
+
+  router.push({ name: "person", params: { id } })
+}
+</script>
 
 <template>
   <div v-if="route.name === 'alumni'" class="card-alumni border">
@@ -28,16 +38,15 @@ const route = useRoute()
       <h6>{{ object.graduate_profile.year_of_graduation }} жылғы түлек</h6>
     </div>
 
-    <router-link
-      :to="{ name: 'person', params: { id: object._id } }"
+    <button
       class="btn-card"
+      @click="onMoreClick(object._id)"
     >
       Толығырақ
-    </router-link>
+    </button>
   </div>
 </template>
 
-
 <style scoped lang="sass">
-  @use "../assets/styles/card"
+@use "../assets/styles/card"
 </style>

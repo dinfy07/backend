@@ -3,7 +3,7 @@ import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { getAccessToken, clearAccessToken } from "@/auth/token.js"
 import { setAuth } from "@/auth/auth.js"
-import { getMe, updateMe } from "@/api/index.js"
+import {getMe, logoutApi, updateMe} from "@/api/index.js"
 
 const router = useRouter()
 
@@ -38,12 +38,17 @@ onMounted(async () => {
 })
 
 // ===== actions =====
-const logout = () => {
-  clearAccessToken()
-  setAuth(false)
-  router.push("/login")
+const logout = async () => {
+  try {
+    await logoutApi()
+  } catch (e) {
+    // даже если ошибка — продолжаем
+  } finally {
+    clearAccessToken()
+    setAuth(false)
+    router.replace('/login')
+  }
 }
-
 const startEdit = () => {
   firstName.value = user.value.first_name
   lastName.value = user.value.last_name

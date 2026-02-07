@@ -9,23 +9,42 @@ import { fileURLToPath } from "url"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
 export const register = async (req, res) => {
-  const { first_name, last_name, phone_number, password, role } = req.body
+  try {
+    const { first_name, last_name, phone_number, password, role } = req.body
 
-  const hash = await bcrypt.hash(password, 10)
+    if (!first_name || !last_name || !phone_number || !password) {
+      return res.status(400).json({ message: 'Missing required fields' })
+    }
 
+    const exists = await User.findOne({ phone_number })
+    if (exists) {
+      return res.status(409).json({ message: 'User already exists' })
+    }
 
-  const user = await User.create({
-    first_name,
-    last_name,
-    phone_number,
-    password: hash,
-    role: role || 'user'
-  })
+    const hash = await bcrypt.hash(password, 10)
 
-  res.json(user)
+    const user = await User.create({
+      first_name,
+      last_name,
+      phone_number,
+      password: hash,
+      role: role || 'user'
+    })
+
+    res.status(201).json({
+      id: user._id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      phone_number: user.phone_number,
+      role: user.role
+    })
+  } catch (e) {
+    console.error('REGISTER ERROR:', e)
+    res.status(500).json({ message: 'Registration failed' })
+  }
 }
+
 export const updateMe = async (req, res) => {
   try {
     const { password, ...rest } = req.body
@@ -59,8 +78,6 @@ export const me = async (req, res) => {
   const user = await User.findById(req.user.id).select('-password')
   res.json(user)
 }
-
-
 
 export const login = async (req, res) => {
   const { phone_number, password } = req.body
@@ -106,7 +123,6 @@ export const refresh = (req, res) => {
     res.sendStatus(401)
   }
 }
-
 
 export const application = async (req, res) => {
   try {
@@ -155,5 +171,15 @@ export const application = async (req, res) => {
   }
 }
 
+export const logout = (req, res) => {
+  res.clearCookie('refreshToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    path: '/'
+  })
+
+  res.sendStatus(204)
+}
 
 
