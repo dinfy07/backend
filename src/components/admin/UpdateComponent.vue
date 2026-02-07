@@ -4,9 +4,9 @@ import { useRoute } from 'vue-router'
 import {
   getUserById,
   updateUser,
-  getPerson,
   updateAlumni
 } from '@/api/admin.js'
+import {getPerson} from "@/api/index.js";
 
 // props от router
 const props = defineProps({

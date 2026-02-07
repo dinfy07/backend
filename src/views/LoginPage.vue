@@ -15,7 +15,7 @@ async function logIn() {
     await login(tel.value, password.value)
 
     // ✅ успешный логин → редирект
-    router.push({ name: 'alumni' })
+    router.push({ name: 'cabinet' })
     // или router.push('/')
 
     tel.value = ""

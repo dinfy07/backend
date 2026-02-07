@@ -64,11 +64,6 @@ export const createAlumni = async (alumniData) => {
   return data
 }
 
-// PUBLIC / SHARED
-export const getPerson = async (id) => {
-  const { data } = await api.get(`alumni/${id}`)
-  return data
-}
 
 export const getUserById = async (id) => {
   const { data } = await api.get(`user/${id}`)

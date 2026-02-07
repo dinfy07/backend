@@ -20,15 +20,25 @@ api.interceptors.request.use((config) => {
 // ================= AUTH =================
 
 // login
-export const login = async (phone_number, password) => {
-  const { data } = await api.post("auth/login", {
-    phone_number,
-    password,
-  })
+import {setAuth} from "@/auth/auth.js"
 
-  setAccessToken(data.accessToken)
-  return data
+export const login = async (phone_number, password) => {
+  try {
+    const { data } = await api.post("auth/login", {
+      phone_number,
+      password,
+    })
+
+    setAccessToken(data.accessToken)
+    setAuth(true)
+
+    return data
+  } catch (error) {
+    setAuth(false) // на всякий случай
+    throw error     // пробрасываем дальше
+  }
 }
+
 
 // refresh
 export const refreshToken = async () => {

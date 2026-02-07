@@ -57,26 +57,36 @@ export const updateMe = async (req, res) => {
 
 export const me = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password')
+    const refreshToken = req.cookies.refreshToken
+    if (!refreshToken) return res.sendStatus(401)
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' })
-    }
+    const payload = jwt.verify(
+      refreshToken,
+      process.env.JWT_REFRESH_SECRET
+    )
+    const user = await User.findById(payload.id).select('-password')
+    if (!user) return res.sendStatus(401)
 
-    res.json(user)
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' })
+    const { accessToken } = generateTokens({
+      id: user._id,
+      role: user.role
+    })
+
+    res.json({ user, accessToken })
+  } catch {
+    res.sendStatus(401)
   }
 }
+
 
 export const login = async (req, res) => {
   const { phone_number, password } = req.body
 
   const user = await User.findOne({ phone_number })
-  if (!user) return res.status(401).json({ message: 'Invalid credentials' })
+  if (!user) return res.status(401).json({ message: 'Invalid phone number' })
 
   const isValid = await bcrypt.compare(password, user.password)
-  if (!isValid) return res.status(401).json({ message: 'Invalid credentials' })
+  if (!isValid) return res.status(401).json({ message: 'Invalid password' })
 
   const { accessToken, refreshToken } = generateTokens({
     id: user._id,
@@ -85,7 +95,8 @@ export const login = async (req, res) => {
 
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: 'none',
+    secure: true
   })
 
   res.json({ accessToken, user })
@@ -104,7 +115,8 @@ export const refresh = (req, res) => {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      sameSite: 'lax'
+      sameSite: 'none',
+      secure: true
     })
 
     res.json({ accessToken })
