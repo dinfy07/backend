@@ -106,8 +106,6 @@ export const refresh = (req, res) => {
   try {
     const token = req.cookies.refreshToken
     if (!token) return res.sendStatus(401)
-    console.log('REFRESH_SECRET:', process.env.JWT_REFRESH_SECRET)
-    console.log('COOKIE:', req.cookies.refreshToken)
 
     const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
 

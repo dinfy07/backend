@@ -36,10 +36,8 @@ export const registerUser = async (userData) => {
   return data
 }
 
-// UPDATE user
-// src/api/admin.js
 export const updateUser = async (id, userData) => {
-  const { data } = await adminApi.put(`user/${id}`, userData)
+  const { data } = await adminApi.patch(`user/${id}`, userData)
   return data
 }
 
